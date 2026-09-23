@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 
 namespace Ai_MeetingsAssistant.Services
 {
-    public class OllamaService : AIiService
+    public class OllamaService : IAiService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;

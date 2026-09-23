@@ -12,7 +12,7 @@ builder.Services.AddHttpClient();
 
 if (aiProvider == "Ollama")
 {
-    builder.Services.AddScoped<AIiService, OllamaService>();
+    builder.Services.AddScoped<IAiService, OllamaService>();
 }
 
 builder.Services.AddControllers();
