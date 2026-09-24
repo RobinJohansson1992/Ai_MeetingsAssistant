@@ -26,6 +26,16 @@ namespace Ai_MeetingsAssistant.Controllers
             });
         }
         // skapa mötesagenda
+        [HttpPost("agenda")]
+        public async Task<IActionResult> CreateMeetingAgenda(AgendaRequest request)
+        {
+            var result = await _assistantService.CreateMeetingAgenda(request.Title, request.Purpose, request.DurationInMinutes);
+
+            return Ok(new
+            {
+                result
+            });
+        }
 
         // skriva en professionell mötesinbjudan
     }

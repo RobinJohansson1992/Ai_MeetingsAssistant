@@ -6,6 +6,6 @@ namespace Ai_MeetingsAssistant.DTOs
     {
         [Required]
         [MinLength(5)]
-        public string Notes { get; set; } = "";
+        public string? Notes { get; set; } 
     }
 }

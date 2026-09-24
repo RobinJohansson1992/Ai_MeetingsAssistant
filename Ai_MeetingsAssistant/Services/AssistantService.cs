@@ -45,9 +45,36 @@ namespace Ai_MeetingsAssistant.Services
             return await _aiService.SendPrompt(systemPrompt, userPrompt);
         }
 
-
-        
         // skapa mötesagenda
+        public async Task<string> CreateMeetingAgenda(string title, string purpose, int durationInMinutes)
+        {
+            var systemPrompt = """
+                Du är en mötesassistent.
+
+                Din uppgift är att hjälpa användaren att skapa en 
+                agenda för ett möte baserad på det användaren skriver in.
+
+                Du ska ta fram tydliga punkter och lägga dom i en logisk ordning
+                med ett ungefärligt tidsintervall till varje punkt.
+
+                Hitta inte på information som inte finns i anteckningarna.
+                """;
+
+            var userPrompt = $"""
+                Skapa en agenda till följande anteckningar:
+
+                Mötestitel:
+                {title}
+
+                Syfte:
+                {purpose}
+
+                Mötestid:
+                {durationInMinutes} minuter
+                """;
+
+            return await _aiService.SendPrompt(systemPrompt, userPrompt);
+        }
 
         // skriva en professionell mötesinbjudan
     }
