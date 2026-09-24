@@ -2,10 +2,10 @@
 
 namespace Ai_MeetingsAssistant.DTOs
 {
-    public class AssistantRequest
+    public class SummarizeRequest
     {
         [Required]
         [MinLength(5)]
-        public string? notes { get; set; }
+        public string Notes { get; set; } = "";
     }
 }

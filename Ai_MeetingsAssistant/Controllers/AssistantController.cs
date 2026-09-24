@@ -5,20 +5,25 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ai_MeetingsAssistant.Controllers
 {
     [ApiController]
+    [Route("api/ai")]
     public class AssistantController : Controller
     {
         private readonly AssistantService _assistantService;
-        private readonly IAiService _aiService;
 
-        public AssistantController(AssistantService assistantService, IAiService aiService) 
+        public AssistantController(AssistantService assistantService) 
         {
             _assistantService = assistantService;
-            _aiService = aiService;
         }
         // sammanfatta mötesantekningar
-        public async Task<IActionResult> SummarizeNotes([FromBody]AssistantRequest request)
+        [HttpPost("summarize")]
+        public async Task<IActionResult> SummarizeNotes(SummarizeRequest request)
         {
+            var result = await _assistantService.SummarizeNotes(request.Notes);
 
+            return Ok(new
+            {
+                result
+            });
         }
         // skapa mötesagenda
 
