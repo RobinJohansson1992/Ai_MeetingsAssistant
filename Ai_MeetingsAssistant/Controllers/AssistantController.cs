@@ -16,9 +16,9 @@ namespace Ai_MeetingsAssistant.Controllers
         }
         // sammanfatta mötesantekningar
         [HttpPost("summarize")]
-        public async Task<IActionResult> SummarizeNotes(SummarizeRequest request)
+        public async Task<IActionResult> SummarizeMeetingNotes(SummarizeRequest request)
         {
-            var result = await _assistantService.SummarizeNotes(request.Notes);
+            var result = await _assistantService.SummarizeMeetingNotes(request.Notes);
 
             return Ok(new
             {
@@ -38,5 +38,15 @@ namespace Ai_MeetingsAssistant.Controllers
         }
 
         // skriva en professionell mötesinbjudan
+        [HttpPost("invitation")]
+        public async Task<IActionResult> CreateMeetingInvitation(InvitationRequest request)
+        {
+            var result = await _assistantService.CreateMeetingInvitation(request.Title, request.Week, request.WeekDay, request.Location, request.Purpose);
+
+            return Ok(new
+            {
+                result
+            });
+        }
     }
 }

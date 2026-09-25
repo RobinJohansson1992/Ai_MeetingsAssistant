@@ -13,7 +13,7 @@ namespace Ai_MeetingsAssistant.Services
         }
 
         // sammanfatta mötesantekningar
-        public async Task<string> SummarizeNotes(string notes)
+        public async Task<string> SummarizeMeetingNotes(string notes)
         {
             var systemPrompt = """
                 Du är en mötesassistent.
@@ -42,7 +42,9 @@ namespace Ai_MeetingsAssistant.Services
                 {notes}
                 """;
 
-            return await _aiService.SendPrompt(systemPrompt, userPrompt);
+            return await _aiService.SendPrompt(
+                systemPrompt, 
+                userPrompt);
         }
 
         // skapa mötesagenda
@@ -73,9 +75,57 @@ namespace Ai_MeetingsAssistant.Services
                 {durationInMinutes} minuter
                 """;
 
-            return await _aiService.SendPrompt(systemPrompt, userPrompt);
+            return await _aiService.SendPrompt(
+                systemPrompt, 
+                userPrompt);
         }
 
         // skriva en professionell mötesinbjudan
+        public async Task<string> CreateMeetingInvitation(
+            string title,
+            string week,
+            string weekDay,
+            string location,
+            string purpose)
+        {
+            var systemPrompt = """
+                Du är en mötesassistent.
+
+                Skriv en professionel men trevlig mötesinbjudan baserad på användarens input.
+
+                Inkludera:
+                - hälsning
+                - mötets namn
+                - datum och tid
+                - plats
+                - sytfe
+                - avsluta meddelandet med 'Välkommen!'
+                
+                Hitta inte på information som saknas, svara endast med själva inbjudan, ingenting annat.
+                """;
+
+            var userPrompt = $"""
+                Skapa en mötesinbjudan med följande information:
+
+                Möte:
+                {title}
+
+                Vecka:
+                {week}
+
+                Dag:
+                {weekDay}
+
+                Plats:
+                {location}
+
+                Syfte:
+                {purpose}
+                """;
+
+            return await _aiService.SendPrompt(
+                systemPrompt,
+                userPrompt);
+        }
     }
 }
