@@ -133,13 +133,13 @@ namespace Ai_MeetingsAssistant.Services
 
                 Inkludera:
                 - hälsning
-                - mötets namn
                 - datum och tid
                 - plats
                 - sytfe
                 - avsluta meddelandet med 'Välkommen!'
 
                 REGLER:
+                - Börja inbjudan med 'Hej! Du är inbjuden till *titel*!'
                 - Använd vanliga versaler för rubriker.
                 - Skriv varje rubrik på en egen rad.
                 - Lägg en tom rad efter varje rubrik och mellan varje avsnitt.
