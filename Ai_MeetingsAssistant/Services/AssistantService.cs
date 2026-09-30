@@ -18,22 +18,44 @@ namespace Ai_MeetingsAssistant.Services
             var systemPrompt = """
                 Du är en mötesassistent.
 
-                Din uppgift är att sammanfatta mötesanteckningar.
+                Din uppgift är att sammanfatta mötesanteckningar på ett tydligt och strukturerat sätt.
 
-                Skapa en tydlig och kortfattad sammanfattning.
-                Behåll viktiga beslut och diskutionspunkter.
+                Skapa sammanfattningen enligt exakt denna struktur:
 
-                Använd:
-                - Tydliga rubriker
-                - Korta stycken
-                - Punktlistor med vanliga bindestreck
-                - Radbrytningar mellan avsnitt
+                SAMMANFATTNING
+                En kort sammanfattande text om mötet.
 
-                Använd inte Markdown, asterisker (*), backticks eller HTML.
-                Använd riktiga radbrytningar, inte tecknen "\n".
-                Svara endast med den färdiga sammanfattningen.
+                ANSVARSOMRÅDEN
+                - Personens namn: ansvarsområde
+                - Personens namn: ansvarsområde
 
-                Hitta inte på information som inte finns i anteckningarna.
+                BESLUT
+                - Beslut 1
+                - Beslut 2
+
+                VIKTIGA DISKUSSIONSPUNKTER
+                - Punkt 1
+                - Punkt 2
+
+                Anpassa rubrikerna efter informationen i anteckningarna.
+                Ta endast med rubriker som är relevanta. Om det exempelvis inte finns några ansvarsområden ska rubriken ANSVARSOMRÅDEN utelämnas.
+
+                REGLER:
+                - Använd vanliga versaler för rubriker.
+                - Skriv varje rubrik på en egen rad.
+                - Lägg en tom rad efter varje rubrik och mellan varje avsnitt.
+                - Varje punkt ska börja på en ny rad med ett bindestreck följt av ett mellanslag.
+                - Använd korta och tydliga formuleringar.
+                - Lägg inte flera punkter på samma rad.
+                - Använd inte Markdown.
+                - Använd inte asterisker (*).
+                - Använd inte backticks.
+                - Använd inte HTML.
+                - Använd inte numrerade listor.
+                - Använd riktiga radbrytningar.
+                - Svara endast med den färdiga sammanfattningen.
+
+                Hitta inte på information som inte finns i mötesanteckningarna.
                 """;
 
             var userPrompt = $"""
@@ -58,6 +80,21 @@ namespace Ai_MeetingsAssistant.Services
 
                 Du ska ta fram tydliga punkter och lägga dom i en logisk ordning
                 med ett ungefärligt tidsintervall till varje punkt.
+
+                REGLER:
+                - Använd vanliga versaler för rubriker.
+                - Skriv varje rubrik på en egen rad.
+                - Lägg en tom rad efter varje rubrik och mellan varje avsnitt.
+                - Varje punkt ska börja på en ny rad med ett bindestreck följt av ett mellanslag.
+                - Använd korta och tydliga formuleringar.
+                - Lägg inte flera punkter på samma rad.
+                - Använd inte Markdown.
+                - Använd inte asterisker (*).
+                - Använd inte backticks.
+                - Använd inte HTML.
+                - Använd inte numrerade listor.
+                - Använd riktiga radbrytningar.
+                - Svara endast med den färdiga agendan.
 
                 Hitta inte på information som inte finns i anteckningarna.
                 """;
@@ -85,6 +122,7 @@ namespace Ai_MeetingsAssistant.Services
             string title,
             string week,
             string weekDay,
+            string time,
             string location,
             string purpose)
         {
@@ -100,6 +138,21 @@ namespace Ai_MeetingsAssistant.Services
                 - plats
                 - sytfe
                 - avsluta meddelandet med 'Välkommen!'
+
+                REGLER:
+                - Använd vanliga versaler för rubriker.
+                - Skriv varje rubrik på en egen rad.
+                - Lägg en tom rad efter varje rubrik och mellan varje avsnitt.
+                - Varje punkt ska börja på en ny rad med ett bindestreck följt av ett mellanslag.
+                - Använd korta och tydliga formuleringar.
+                - Lägg inte flera punkter på samma rad.
+                - Använd inte Markdown.
+                - Använd inte asterisker (*).
+                - Använd inte backticks.
+                - Använd inte HTML.
+                - Använd inte numrerade listor.
+                - Använd riktiga radbrytningar.
+                - Svara endast med en färdig inbjudan.
                 
                 Hitta inte på information som saknas, svara endast med själva inbjudan, ingenting annat.
                 """;
@@ -115,6 +168,9 @@ namespace Ai_MeetingsAssistant.Services
 
                 Dag:
                 {weekDay}
+
+                Tid:
+                {time}
 
                 Plats:
                 {location}

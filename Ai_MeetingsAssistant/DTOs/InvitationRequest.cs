@@ -11,6 +11,8 @@ namespace Ai_MeetingsAssistant.DTOs
         [Required]
         public string? WeekDay { get; set; }
         [Required]
+        public string? Time { get; set; }
+        [Required]
         public string? Location { get; set; }
         [Required]
         public string? Purpose { get; set; }

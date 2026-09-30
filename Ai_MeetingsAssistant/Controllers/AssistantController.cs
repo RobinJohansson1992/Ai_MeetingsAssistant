@@ -41,7 +41,7 @@ namespace Ai_MeetingsAssistant.Controllers
         [HttpPost("invitation")]
         public async Task<IActionResult> CreateMeetingInvitation(InvitationRequest request)
         {
-            var result = await _assistantService.CreateMeetingInvitation(request.Title, request.Week, request.WeekDay, request.Location, request.Purpose);
+            var result = await _assistantService.CreateMeetingInvitation(request.Title, request.Week, request.WeekDay, request.Time, request.Location, request.Purpose);
 
             return Ok(new
             {
