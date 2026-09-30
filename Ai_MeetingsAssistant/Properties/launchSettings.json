@@ -13,11 +13,12 @@
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7283;http://localhost:5169",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "OLLAMA_API_KEY": "9dc49cc001a34c33bf1c6b37d9a4a666.okwWs888IkO6TXwTFOB7ViG4"
+        "OLLAMA_API_KEY": ""
       }
     }
   }

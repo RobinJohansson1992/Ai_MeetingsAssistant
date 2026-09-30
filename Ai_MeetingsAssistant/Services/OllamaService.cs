@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 
 namespace Ai_MeetingsAssistant.Services
 {
-    public class OllamaService : AIiService
+    public class OllamaService : IAiService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
@@ -11,7 +11,7 @@ namespace Ai_MeetingsAssistant.Services
         public OllamaService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _apiKey = config["OLLAMA_API_KEY"]!;
+            _apiKey = config["OLLAMA_API_KEY"];
         }
 
         public async Task<string> SendPrompt(string systemPrompt, string userPrompt)
@@ -24,7 +24,7 @@ namespace Ai_MeetingsAssistant.Services
                 new { role = "system", content = systemPrompt },
                 new { role = "user", content = userPrompt }
             },
-                Stream = false
+                stream = false
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, "https://ollama.com/api/chat");
@@ -35,9 +35,11 @@ namespace Ai_MeetingsAssistant.Services
             request.Content = JsonContent.Create(payload);
 
             var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadFromJsonAsync<OllamaResponse>();
-            Console.WriteLine(result);
+            Console.WriteLine(result?.Message.Content);
+
             return result?.Message.Content ?? "";
         }
     }
